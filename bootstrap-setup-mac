@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+# Become super user before starting work
+sudo -v
+
+printf "\nSetting up this Mac...\n\n"
+
+if [[ "$(xcode-select -p)" == "" ]]; then
+  printf "\nInstalling Xcode\n"
+  xcode-select --install
+fi
+
+printf "\n\nAll good. Enjoy your day, human.\n"
