@@ -1,0 +1,3 @@
+caskroom/fonts
+homebrew/cask
+homebrew/core

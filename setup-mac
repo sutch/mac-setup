@@ -22,13 +22,17 @@ fi
 printf "\nUpdating Brew\n"
 brew update
 brew upgrade
+printf "\nInstalling 3rd party Brew taps\n"
+comm -23 <(sort tap.txt) <(brew tap) | xargs brew tap
+# Update tap.txt
+brew tap > tap.txt
 printf "\nInstalling Brew taps\n"
 comm -23 <(sort brew.txt) <(brew leaves) | xargs brew install
 # Update brew.txt
 brew leaves > brew.txt
 printf "\nInstalling Cask taps\n"
 comm -23 <(sort cask.txt) <(brew cask ls) | xargs brew cask install
-# Update brew.txt
+# Update cask.txt
 brew cask ls > cask.txt
 brew cleanup
 

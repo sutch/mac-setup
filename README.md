@@ -16,5 +16,6 @@ bash <(curl -s https://raw.githubusercontent.com/sutch/mac-setup/master/bootstra
 
 ## Setup Mac
 
-- Installs the software listed in brew.txt via `brew`
-- Installs the software listed in cask.txt via `brew cask
+- Adds the third-party Brew repositories in tap.txt via `brew tap`
+- Installs the software listed in brew.txt via `brew install`
+- Installs the software listed in cask.txt via `brew cask install`
