@@ -1,3 +1,4 @@
+caskroom/fonts
 libp11
 mysql
 node
