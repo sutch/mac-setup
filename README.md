@@ -20,8 +20,14 @@ bash <(curl -s https://raw.githubusercontent.com/sutch/mac-setup/master/bootstra
 
 Execute `setup-mac` occasionally.
 
+Requires user be logged into Mac App Store.
+
 - Adds the third-party Brew repositories in tap.txt via `brew tap`
 - Installs the software listed in brew.txt via `brew install`
 - Installs the software listed in cask.txt via `brew cask install`
 - Installs oh-my-zsh (https://ohmyz.sh/)
 - Install Amphetamine from App Store
+- Configure git
+  - Populates user.name with the current user's name
+  - Populates user.email with the current user's Apple ID (as logged into Mac App Store)
+  - Uses Atom as core.editor

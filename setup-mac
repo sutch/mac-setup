@@ -50,7 +50,22 @@ else
   zsh $ZSH/tools/upgrade.sh
 fi
 
-printf "\nInstalling Amphetamine from App Store"
+printf "\nInstalling Amphetamine from App Store\n"
 mas install 937984704
+
+# Configure git
+printf "\nConfiguring git\n"
+if [[ -z "$(git config user.name)" ]]; then
+  printf "Setting user.name to \"$(id -F)\"\n"
+  git config --global user.name "$(id -F)"
+fi
+if [[ -z "$(git config user.email)" ]]; then
+  printf "Setting user.email to \"$(mas account)\"\n"
+  git config --global user.email "$(mas account)"
+fi
+if [[ -z "$(git config core.editor)" ]]; then
+  printf "Setting core.editor to atom\n"
+  git config --global core.editor atom
+fi
 
 printf "\n\n\nAll good. Enjoy your day, human.\n"
