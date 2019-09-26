@@ -2,6 +2,8 @@
 
 My Mac setup.
 
+Note: Must sign in to the App Store.
+
 ## Bootstrap
 
 Fresh Mac? Bootstrap the setup.
@@ -22,3 +24,4 @@ Execute `setup-mac` occasionally.
 - Installs the software listed in brew.txt via `brew install`
 - Installs the software listed in cask.txt via `brew cask install`
 - Installs oh-my-zsh (https://ohmyz.sh/)
+- Install Amphetamine from App Store
