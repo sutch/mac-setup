@@ -9,7 +9,7 @@ printf "\nSetting up this Mac...\n\n"
 # Brew
 if ! command -v brew > /dev/null 2>&1; then
   printf "\nInstalling Brew\n"
-  I=1 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  CI=1 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew analytics off
 fi
 
