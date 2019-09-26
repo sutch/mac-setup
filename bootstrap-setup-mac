@@ -4,7 +4,7 @@ set -e
 # Become super user before starting work
 sudo -v
 
-printf "\nSetting up this Mac...\n\n"
+printf "\nBootstrapping setup up this Mac...\n\n"
 
 # Brew
 if ! command -v brew > /dev/null 2>&1; then
@@ -13,4 +13,10 @@ if ! command -v brew > /dev/null 2>&1; then
   brew analytics off
 fi
 
-printf "\n\nAll good. Enjoy your day, human.\n"
+# Git the repo
+if [ ! -e ~/mac-setup ]; then
+  printf "\nCloning Mac setup\n"
+  git clone https://github.com/sutch/mac-setup.git ~/mac-setup
+fi
+
+bash ~/mac-setup/setup-mac
