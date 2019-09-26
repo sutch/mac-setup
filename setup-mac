@@ -40,7 +40,7 @@ printf "\nMaking zsh the default shell"
 if ! grep -q $(which zsh) /etc/shells; then
   sudo sh -c "echo $(which zsh) >> /etc/shells"
 fi
-sudo chsh -s $(which zsh)
+sudo chsh -s $(which zsh) $(id -un)
 
 if [ ! -e ~/.oh-my-zsh ]; then
   printf "\nInstalling oh-my-zsh\n"
