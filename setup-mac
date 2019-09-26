@@ -50,4 +50,7 @@ else
   zsh $ZSH/tools/upgrade.sh
 fi
 
+printf "\nInstalling Amphetamine from App Store"
+mas install 937984704
+
 printf "\n\n\nAll good. Enjoy your day, human.\n"
