@@ -6,9 +6,11 @@ sudo -v
 
 printf "\nSetting up this Mac...\n\n"
 
-if [[ "$(xcode-select -p)" == "" ]]; then
-  printf "\nInstalling Xcode\n"
-  xcode-select --install
+# Brew
+if ! command -v brew > /dev/null 2>&1; then
+  printf "\nInstalling Brew\n"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  brew analytics off
 fi
 
 printf "\n\nAll good. Enjoy your day, human.\n"
