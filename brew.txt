@@ -1,0 +1,7 @@
+libp11
+mysql
+node
+rbenv
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting

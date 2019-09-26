@@ -1,0 +1,3 @@
+atom
+font-hack-nerd-font
+iterm2

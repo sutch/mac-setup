@@ -12,15 +12,10 @@ printf "\nSetting up this Mac...\n\n"
 # Enable italic support
 tic xterm-256color-italic.terminfo
 
-if [[ "$(xcode-select -p)" == "" ]]; then
-  printf "\nInstalling Xcode\n"
-  xcode-select --install
-fi
-
 # Brew
 if ! command -v brew > /dev/null 2>&1; then
   printf "\nInstalling Brew\n"
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  CI=1 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew analytics off
 fi
 
@@ -30,11 +25,11 @@ brew upgrade
 printf "\nInstalling Brew taps\n"
 comm -23 <(sort brew.txt) <(brew leaves) | xargs brew install
 # Update brew.txt
-# brew leaves > brew.txt
-# printf "\nInstalling Cask taps\n"
-# comm -23 <(sort cask.txt) <(brew cask ls) | xargs brew cask install
-# # Update brew.txt
-# brew cask ls > cask.txt
-# brew cleanup
+brew leaves > brew.txt
+printf "\nInstalling Cask taps\n"
+comm -23 <(sort cask.txt) <(brew cask ls) | xargs brew cask install
+# Update brew.txt
+brew cask ls > cask.txt
+brew cleanup
 
 printf "\n\n\nAll good. Enjoy your day, human.\n"
