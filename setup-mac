@@ -12,7 +12,8 @@ printf "\nSetting up this Mac...\n\n"
 # Enable italic support
 tic xterm-256color-italic.terminfo
 
-# Brew
+# Homebrew: https://brew.sh/
+
 if ! command -v brew > /dev/null 2>&1; then
   printf "\nInstalling Brew\n"
   CI=1 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -24,24 +25,29 @@ brew update
 brew upgrade
 printf "\nInstalling 3rd party Brew taps\n"
 comm -23 <(sort tap.txt) <(brew tap) | xargs brew tap
+
 # Update tap.txt
 brew tap > tap.txt
 printf "\nInstalling Brew taps\n"
 comm -23 <(sort brew.txt) <(brew leaves) | xargs brew install
+
 # Update brew.txt
 brew leaves > brew.txt
 printf "\nInstalling Cask taps\n"
 comm -23 <(sort cask.txt) <(brew cask ls) | xargs brew cask install
+
 # Update cask.txt
 brew cask ls > cask.txt
 brew cleanup
 
-printf "\nMaking zsh the default shell"
+# zsh: http://zsh.sourceforge.net/
+printf "\nMaking zsh the default shell\n"
 if ! grep -q $(which zsh) /etc/shells; then
-  sudo sh -c "echo $(which zsh) >> /etc/shells"
+  sudo sh -c "printf $(which zsh) >> /etc/shells"
 fi
 sudo chsh -s $(which zsh) $(id -un)
 
+# oh-my-zsh: https://ohmyz.sh/
 if [ ! -e ~/.oh-my-zsh ]; then
   printf "\nInstalling oh-my-zsh\n"
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -50,8 +56,53 @@ else
   zsh $ZSH/tools/upgrade.sh
 fi
 
-printf "\nInstalling Amphetamine from App Store\n"
-mas install 937984704
+# Get Homebrew installation directory
+HOMEBREW_PREFIX="$(brew config | grep 'HOMEBREW_PREFIX:' | cut -d: -f2 | sed 's/^[ \t]*//;s/[ \t]*$//')"
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
+printf "\nUpdating zsh to use zsh-syntax-highlighting\n"
+LINE="source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+
+# https://github.com/zsh-users/zsh-autosuggestions
+printf "\nUpdating zsh to use zsh-autosuggestions\n"
+LINE="source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+
+# zsh options: http://zsh.sourceforge.net/Doc/Release/Options.html
+
+# zsh: new history lines are NOT added to the $HISTFILE incrementally (as soon as they are entered)
+LINE="unsetopt inc_append_history"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+
+# zsh: do NOT import new commands from the history file, and do not append typed commands to the history file
+LINE="unsetopt share_history"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
+
+# pwerlevel9k for zsh: https://github.com/Powerlevel9k/powerlevel9k
+
+if [ ! -e ~/.powerlevel9k ]; then
+  printf "\nInstalling powerlevel9k for zsh\n"
+  git clone https://github.com/bhilburn/powerlevel9k.git ~/.powerlevel9k
+else
+  printf "\Updating powerlevel9k for zsh\n"
+  git -C ~/.powerlevel9k pull
+fi
+
+LINE="POWERLEVEL9K_MODE='nerdfont-complete'"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+
+LINE="source ~/.powerlevel9k/powerlevel9k.zsh-theme"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
+
+LINE="POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
+
+LINE="POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
+
+LINE="POWERLEVEL9K_PROMPT_ADD_NEWLINE=true"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 # Configure git
 printf "\nConfiguring git\n"
@@ -67,5 +118,9 @@ if [[ -z "$(git config core.editor)" ]]; then
   printf "Setting core.editor to atom\n"
   git config --global core.editor atom
 fi
+
+# https://apps.apple.com/us/app/amphetamine/id937984704
+printf "\nInstalling Amphetamine from App Store\n"
+mas install 937984704
 
 printf "\n\n\nAll good. Enjoy your day, human.\n"
