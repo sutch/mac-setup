@@ -116,37 +116,32 @@ HOMEBREW_PREFIX="$(brew config | grep 'HOMEBREW_PREFIX:' | cut -d: -f2 | sed 's/
 # https://github.com/zsh-users/zsh-syntax-highlighting
 printf "\nUpdating zsh to use zsh-syntax-highlighting\n"
 LINE="source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 # https://github.com/zsh-users/zsh-autosuggestions
 printf "\nUpdating zsh to use zsh-autosuggestions\n"
 LINE="source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 # zsh options: http://zsh.sourceforge.net/Doc/Release/Options.html
 
 # zsh: new history lines are NOT added to the $HISTFILE incrementally (as soon as they are entered)
 LINE="unsetopt inc_append_history"
-grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 # zsh: do NOT import new commands from the history file, and do not append typed commands to the history file
 LINE="unsetopt share_history"
 grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
-# pwerlevel9k for zsh: https://github.com/Powerlevel9k/powerlevel9k
+# powerlevel9k for zsh: https://github.com/Powerlevel9k/powerlevel9k
 
-if [ ! -e ~/.powerlevel9k ]; then
-  printf "\nInstalling powerlevel9k for zsh\n"
-  git clone https://github.com/bhilburn/powerlevel9k.git ~/.powerlevel9k
-else
-  printf "Updating powerlevel9k for zsh\n"
-  git -C ~/.powerlevel9k pull
-fi
+LINE="source ${HOMEBREW_PREFIX}/opt/powerlevel9/powerlevel9k.zsh-theme"
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 LINE="POWERLEVEL9K_MODE='nerdfont-complete'"
-grep -qxF "${LINE}" ~/.zshrc || printf "\n\n${LINE}" >> ~/.zshrc
+grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
-LINE="source ~/.powerlevel9k/powerlevel9k.zsh-theme"
+LINE="source ${HOMEBREW_PREFIX}/opt/powerlevel9k/powerlevel9k.zsh-theme"
 grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 LINE="POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)"

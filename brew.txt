@@ -2,7 +2,7 @@ libp11
 mas
 mysql
 node
+sambadevi/powerlevel9k/powerlevel9k
 rbenv
-zsh
 zsh-autosuggestions
 zsh-syntax-highlighting

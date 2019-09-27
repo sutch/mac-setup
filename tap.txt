@@ -1,3 +1,4 @@
 caskroom/fonts
 homebrew/cask
 homebrew/core
+sambadevi/powerlevel9k
