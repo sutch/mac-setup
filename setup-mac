@@ -144,9 +144,6 @@ grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 LINE="POWERLEVEL9K_MODE='nerdfont-complete'"
 grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
-LINE="source ${HOMEBREW_PREFIX}/opt/powerlevel9k/powerlevel9k.zsh-theme"
-grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
-
 LINE="POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(ssh dir vcs newline status)"
 grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
