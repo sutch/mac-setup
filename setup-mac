@@ -138,7 +138,7 @@ grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 # powerlevel9k for zsh: https://github.com/Powerlevel9k/powerlevel9k
 
-LINE="source ${HOMEBREW_PREFIX}/opt/powerlevel9/powerlevel9k.zsh-theme"
+LINE="source ${HOMEBREW_PREFIX}/opt/powerlevel9k/powerlevel9k.zsh-theme"
 grep -qxF "${LINE}" ~/.zshrc || printf "\n${LINE}" >> ~/.zshrc
 
 LINE="POWERLEVEL9K_MODE='nerdfont-complete'"
